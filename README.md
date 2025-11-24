@@ -81,14 +81,14 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📞 Contact
 
-- Email: NXTGENMAVERICKS@gmail.com
+- Email: vankireddysomu@gmail.com
 - Phone: +91 6305586671
 - Location: Tirupati, India
 
 ## 🔗 Social Links
 
-- [LinkedIn](https://www.linkedin.com/in/s-venu-55b6042a4/)
-- [GitHub](https://github.com/HemanthReddyBandi)
+- [LinkedIn](https://www.linkedin.com/in/vankireddysomeswarreddy)
+- [GitHub](https://github.com/vankireddysomeswarreddy)
 
 ## 📝 License
 
@@ -97,4 +97,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 🙏 Acknowledgments
 
 - Thanks to all contributors who have helped improve this project
+
 - Special thanks to the open-source community for their valuable tools and libraries
