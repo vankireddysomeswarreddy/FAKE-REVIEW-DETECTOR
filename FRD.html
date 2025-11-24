@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Review Detector</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Add ECharts from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <!-- Our custom script -->
+    <script defer src="script.js"></script>
+</head>
+<body>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Header with Navigation -->
+    <header id="home">
+        <nav class="navbar">
+            <div class="logo">Fake Review Detector</div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#analysis">Analyze</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section Moved to Body -->
+    <section id="analysis" class="hero">
+        <h1>Detect Fake Reviews Instantly!</h1>
+        <p>Enter a product URL to analyze reviews and credibility.</p>
+        <input type="url" id="urlInput" placeholder="Enter product URL" required pattern="https?://.+" oninput="validateURL(this)">
+        <span id="error-message" style="color: red; display: none;">Invalid URL! Use http:// or https://</span>
+        <button onclick="startAnalysis()">Analyze</button>
+        
+        
+    </section>
+
+    <!-- Analysis Progress -->
+    <div id="analysisProgress" class="hidden">
+        <div class="loader-container">
+            <div class="loader"></div>
+            <div class="loader-text">Analyzing Reviews...</div>
+            <div class="loader-steps">
+                <div class="step">Gathering Reviews</div>
+                <div class="step">Analyzing Patterns</div>
+                <div class="step">Calculating Trust Score</div>
+                <div class="step">Generating Report</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analysis Results -->
+    <section id="results" class="hidden">
+        <h2>Analysis Results</h2>
+        
+        <div class="stats">
+            <p>Trust Score: <span id="trustScoreValue">-</span></p>
+            <p>Reviews Taken: <span id="totalReviewsValue">-</span></p>
+            <p>Suspicious Reviews: <span id="suspiciousReviewsValue">-</span></p>
+            <p>Verified Purchases: <span id="verifiedPurchasesValue">-</span></p>
+            <p>Positive: <span id="positiveSentiment">-</span></p>
+            <p>Neutral: <span id="neutralSentiment">-</span></p>
+            <p>Negative: <span id="negativeSentiment">-</span></p>
+        </div>
+
+        <!-- Charts -->
+        <div class="chart-container">
+            <div class="chart-card">
+                <h3>Trust Score Analysis</h3>
+                <div class="chart" id="trustScore"></div>
+                <p class="chart-description">Overall trust score based on multiple factors including review patterns and authenticity.</p>
+            </div>
+            <div class="chart-card">
+                <h3>Sentiment Distribution</h3>
+                <div class="chart" id="patternChart"></div>
+                <p class="chart-description">Distribution of positive, neutral, and negative sentiments in reviews.</p>
+            </div>
+            <div class="chart-card">
+                <h3>Review Credibility</h3>
+                <div class="chart" id="credibilityChart"></div>
+                <p class="chart-description">Breakdown of verified purchases and suspicious reviews.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about">
+        <!-- Add floating shapes -->
+        <svg class="floating-shape" width="50" height="50" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="20" fill="white"/>
+        </svg>
+        <svg class="floating-shape" width="50" height="50" viewBox="0 0 50 50">
+            <rect x="10" y="10" width="30" height="30" fill="white"/>
+        </svg>
+        <svg class="floating-shape" width="50" height="50" viewBox="0 0 50 50">
+            <polygon points="25,5 45,40 5,40" fill="white"/>
+        </svg>
+        
+        <div class="about-container">
+            <h2>About Fake Review Detector</h2>
+            <p>In today's digital marketplace, fake reviews can mislead consumers and harm honest businesses. Our AI-powered system uses advanced algorithms to analyze review authenticity, helping you make informed purchasing decisions.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Pattern Recognition</h3>
+                    <p>Our AI analyzes writing patterns, user behavior, and review timing to identify suspicious patterns that humans might miss. We detect mass-generated reviews and coordinated review campaigns.</p>
+                </div>
+    
+                <div class="feature">
+                    <i class="fas fa-fingerprint"></i>
+                    <h3>Review Authentication</h3>
+                    <p>We verify review authenticity by examining user profiles, purchase history, and review frequency. Our system flags suspicious accounts and potential bot-generated content.</p>
+                </div>
+    
+                <div class="feature">
+                    <i class="fas fa-chart-pie"></i>
+                    <h3>Statistical Analysis</h3>
+                    <p>Using statistical models, we analyze review distributions, rating patterns, and temporal data to identify abnormal review behaviors and suspicious trends.</p>
+                </div>
+                
+                <div class="feature">
+                    <i class="fas fa-language"></i>
+                    <h3>Language Processing</h3>
+                    <p>Advanced NLP algorithms detect artificial language patterns, repeated phrases, and unnatural writing styles commonly found in fake reviews.</p>
+                </div>
+                
+                <div class="feature">
+                    <i class="fas fa-balance-scale"></i>
+                    <h3>Credibility Scoring</h3>
+                    <p>Our trust score combines multiple factors including review authenticity, user verification, sentiment analysis, and historical patterns to rate review reliability.</p>
+                </div>
+                
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Consumer Protection</h3>
+                    <p>We help protect consumers from misleading reviews by providing transparent analysis and detailed credibility reports for product reviews.</p>
+                </div>
+            </div>
+    
+            <a href="#analysis" class="btn">Start Your Analysis</a>
+        </div>
+    </section>
+    <section id="contact">
+        <h1 class="contact-title">GET IN TOUCH</h1>
+        <div class="contact-container">
+                 <div class="contact-info"> 
+                <h2>Let's Connect With US!</h2>
+                <p>
+                    <a href="mailto:vankireddysomu@gmail.com" class="contact-link email">
+                        <i class="fa-solid fa-envelope"></i> NXTGENMAVERICKS@gmail.com
+                    </a>
+                </p>
+                <p>
+                    <a href="tel:+916305586671" class="contact-link phone">
+                        <i class="fa-solid fa-phone"></i> +91 6305586671
+                    </a>
+                </p>
+                <p>
+                    <a href="https://maps.app.goo.gl/c7wxTq2CFgGu8Fx47" target="_blank" class="contact-link location">
+                        <i class="fa-solid fa-location-dot"></i> Tirupati, India
+                    </a>
+                </p>
+                
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/s-venu-55b6042a4/" target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/HemanthReddyBandi" target="_blank">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="" target="_blank">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+    
+                </div>
+            </div>
+    
+            <div class="contact-form">
+                <h2>Send Us Feedback</h2>
+                <form method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="FEEDBACK" placeholder="Your Feedback" rows="5" required></textarea>
+                    <a href="#home"><button type="submit" class="send-btn">Send Feedback</button></a>
+                </form>
+            </div>
+            
+        </div>
+    </section>
+    <!-- Scroll-to-Top Button -->
+    <button id="scrollToTopBtn" onclick="scrollToTop()">
+        <i class="fa-solid fa-angles-up"></i>
+    </button>
+    
+
+</body>
+</html>
